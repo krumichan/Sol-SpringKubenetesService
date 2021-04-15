@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head th:fragment="html-head">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link href="/bootstrap/css/animate.css" rel="stylesheet">
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/bootstrap/css/plugins/codemirror/codemirror.css" rel="stylesheet">
+    <link href="/bootstrap/css/plugins/codemirror/ambiance.css" rel="stylesheet">
+    <link href="/bootstrap/css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet">
+    <link href="/bootstrap/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+    <link href="/bootstrap/css/plugins/toastr/toastr.min.css" rel="stylesheet">
+    <link href="/bootstrap/css/style.css" rel="stylesheet">
+    <link href="/bootstrap/font-awesome/css/font-awesome.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <div th:fragment="left">
+        <nav class="navbar-default navbar-static-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav metismenu" id="side-menu">
+                    <li class="nav-header">
+                        <div class="dropdown profile-element">
+                            <span>
+                                <img alt="image" class="img-circle" src="/bootstrap/img/profile_small.jpg" />
+                            </span>
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <span class="clear">
+                                <span class="block m-t-xs"><strong class="font-bold">
+                                    email: <span sec:authentication="principal.username"></span></strong>
+                                </span>
+<!--                                <span class="block m-t-xs">email: Email for here.</span>-->
+                                <span class="text-muted text-xs block">
+                                    role: <span sec:authentication="principal.authorities"></span>
+                                    <b class="caret"></b></span>
+                            </span>
+                            </a>
+                            <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                                <li><a th:href="@{/logout}">로그아웃</a></li>
+                            </ul>
+                        </div>
+                        <div class="logo-element">
+                            IN+ Name for here.
+                        </div>
+                    </li>
+                    <!--            <li id="home">-->
+                    <!--                <a href="/"><i class="fa fa-laptop"></i> <span class="nav-label">사용자 관리</span></a>-->
+                    <!--            </li>-->
+                    <!--            <li id="mointer">-->
+                    <!--                <a href="/monitering"><i class="fa fa-database"></i> <span class="nav-label">클라이언트 다운로드 </span></a>-->
+                    <!--            </li>-->
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <div th:fragment="header">
+        <div class="row border-bottom">
+            <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header">
+                    <a class="navbar-minimalize minimalize-styl-2 btn btn-primary" href="#"><i class="fa fa-bars"></i></a>
+                    <form role="search" class="navbar-form-custom" method="post" action="#">
+                        <div class="form-group">
+                            <input type="text" placeholder="Search for somthing..." class="form-control" name="top-search" id="top-search">
+                        </div>
+                    </form>
+                </div>
+                <ul class="nav navbar-top-links navbar-right">
+                    <li><a th:href="@{/logout}"><i class="fa fa-sign-out"></i>logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <div>
+        context...!!
+    </div>
+
+    <div class="footer" th:fragment="footer">
+        <div class="pull-right">
+            <i class="fa fa-envelope-square"></i>   webmaster@classact.com
+        </div>
+        <div>
+            <strong>Copyright</strong> Classact Company &copy; 2020-2021
+        </div>
+    </div>
+
+    <div th:fragment="scripts">
+        <!-- Mainly scripts -->
+        <script src="/bootstrap/js/jquery-2.1.1.js"></script>
+        <script src="/bootstrap/js/bootstrap.min.js"></script>
+        <script src="/bootstrap/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+        <script src="/bootstrap/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+        <!-- Custom and plugin javascript -->
+        <script src="/bootstrap/js/inspinia.js"></script>
+        <script src="/bootstrap/js/plugins/pace/pace.min.js"></script>
+
+        <!-- CodeMirror -->
+        <script src="/bootstrap/js/plugins/codemirror/codemirror.js"></script>
+        <script src="/bootstrap/js/plugins/codemirror/mode/javascript/javascript.js"></script>
+
+        <!-- Sweet alert -->
+        <script src="/bootstrap/js/plugins/sweetalert/sweetalert.min.js"></script>
+
+        <!-- New js -->
+        <script src="/bootstrap/js/plugins/datapicker/bootstrap-datepicker.js"></script>
+        <script src="/bootstrap/js/plugins/validate/jquery.validate.min.js"></script>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragment/base::html-head"></head>
+<body>
+<div id="wrapper">
+    <div th:replace="fragment/base::left"></div>
+    <div id="page-wrapper" class="gray-bg">
+        <div th:replace="fragment/base::header"></div>
+
+<!-- 구현 시작부 ------------------------------------------------------------------------------->
+        <div>
+            ... 구현부 ...
+        </div>
+<!-- 구현 종료부 ------------------------------------------------------------------------------->
+
+        <div th:replace="fragment/base::footer"></div>
+    </div>
+</div>
+<div th:replace="fragment/base::scripts"></div>
+</body>
+
+</html>

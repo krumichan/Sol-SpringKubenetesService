@@ -1,0 +1,28 @@
+package kr.co.classact.rancher.apicore.type;
+
+#foreach( $import in $model.importList )
+import ${import};
+#end
+#set ( $toCamelCase = $model.function.get("toCamelCase") )
+#set ( $toLowerUnderscore = $model.function.get("toLowerUnderscore") )
+#set ( $dashToUnderscore = $model.function.get("dashToUnderscore") )
+#set ( $capitalize = $model.function.get("capitalize") )
+#set ( $upper = $model.function.get("upper") )
+
+public class ${model.get("class")} {
+#foreach($entry in $model.structFields.entrySet()) #set ( $k = $dashToUnderscore.apply($entry.key) ) #set ( $v = $entry.value )
+#if ($entry.key == "Default") #set ( $k = "Xxxxx" ) #end
+    private ${v} ${toCamelCase.apply($k)};
+#end
+#foreach($entry in $model.structFields.entrySet())#set ( $k = $dashToUnderscore.apply($entry.key) )#set ( $v = $entry.value )
+#if ($k == "Default") #set ($k = "Xxxxx") #end
+    public ${v} get${capitalize.apply($k)}() {
+        return this.${toCamelCase.apply($k)};
+    }
+
+    public void set${capitalize.apply($k)}(${v} ${toCamelCase.apply($k)}) {
+        this.${toCamelCase.apply($k)} = ${toCamelCase.apply($k)};
+    }
+
+#end
+}

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>RANCHER | Register</title>
+
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/bootstrap/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="/bootstrap/css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="/bootstrap/css/animate.css" rel="stylesheet">
+    <link href="/bootstrap/css/style.css" rel="stylesheet">
+
+</head>
+
+<body class="gray-bg">
+
+<div class="middle-box text-center loginscreen animated fadeInDown">
+    <div>
+        <div>
+            <h1 class="logo-name">IN+</h1>
+        </div>
+
+        <h3>Register to LOGIN+</h3>
+        <p>Create account to see it in action.</p>
+
+        <form id="signup-form" class="m-t" role="form" th:action="@{/user}" method="POST">
+
+            <div class="form-group">
+                <input type="text" class="form-control" name="name" placeholder="name" required>
+            </div>
+            <div class="form-group">
+                <input type="email" class="form-control" name="email" placeholder="e-mail" required>
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" name="password" placeholder="password" required>
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" name="password_check" placeholder="confirm password" required>
+            </div>
+            <div class="form-group">
+                <div class="i-checks" style="float: left">
+                    <label><input type="radio" name="auth" value="ROLE_ADMIN,ROLE_USER"><i></i> ADMIN </label>
+                </div>
+                <div class="i-checks">
+                    <label><input type="radio" name="auth" value="ROLE_USER" checked><i></i> USER </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <p class="text-danger" id="fail-message" style="display: none"></p>
+            </div>
+<!--            <div class="form-group">-->
+<!--                <div class="checkbox i-checks"><label> <input type="checkbox"><i></i> Agree the terms and policy </label></div>-->
+<!--            </div>-->
+            <button type="submit" class="btn btn-primary block full-width m-b">Register</button>
+
+            <p class="text-muted text-center"><small>Already have an account?</small></p>
+            <a class="btn btn-sm btn-white btn-block" th:href="@{/login}">Login</a>
+
+        </form>
+
+        <p class="m-t"><small>Copyrightⓒ2016 Classact corp. All RIGHTS RESERVED.</small></p>
+    </div>
+</div>
+
+
+<!-- Mainly scripts -->
+<script src="/bootstrap/js/jquery-2.1.1.js"></script>
+<script src="/bootstrap/js/bootstrap.min.js"></script>
+
+<!-- iCheck -->
+<script src="/bootstrap/js/plugins/iCheck/icheck.min.js"></script>
+
+<!--<script>-->
+<!--    $(document).ready(function(){-->
+<!--        $('.i-checks').iCheck({-->
+<!--            checkboxClass: 'icheckbox_square-green',-->
+<!--            radioClass: 'iradio_square-green',-->
+<!--        });-->
+<!--    });-->
+<!--</script>-->
+
+<script>
+    let passwordField;
+    let passwordCheckField;
+    let failMessageField;
+
+    const checkFailMessage = "Password and Confirmation Password are not the same.";
+
+    $(document).ready(function() {
+        passwordField = $("input[name=password]");
+        passwordCheckField = $("input[name=password_check]");
+        failMessageField = $("#fail-message");
+
+        failMessageField.css("display", "none");
+        failMessageField.val("");
+
+        $("#signup-form").submit(function() {
+                if (passwordField.val() !== passwordCheckField.val()) {
+                    passwordField.val("");
+                    passwordCheckField.val("");
+
+                    failMessageField.css("display", "");
+                    failMessageField.text(checkFailMessage);
+
+                    return false;
+                }
+            }
+        );
+    })
+</script>
+
+</body>
+</html>

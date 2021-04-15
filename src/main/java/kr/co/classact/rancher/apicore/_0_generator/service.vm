@@ -1,0 +1,62 @@
+#set ( $toCamelCase = $model.function.get("toCamelCase") )
+#set ( $toLowerUnderscore = $model.function.get("toLowerUnderscore") )
+#set ( $dashToUnderscore = $model.function.get("dashToUnderscore") )
+#set ( $capitalize = $model.function.get("capitalize") )
+#set ( $upper = $model.function.get("upper") )
+#set ( $class = $model.get("class") )
+#set ( $type = $model.type )
+package kr.co.classact.rancher.apicore.service;
+
+import kr.co.classact.rancher.apicore.type.Filter;
+import kr.co.classact.rancher.apicore._1_core.base.TypeCollection;
+
+import kr.co.classact.rancher.apicore.type.${class};
+#foreach( $import in $model.importActionList )
+import ${import};
+#end
+import retrofit2.Call;
+import retrofit2.Response;
+import retrofit2.http.Body;
+import retrofit2.http.DELETE;
+import retrofit2.http.GET;
+import retrofit2.http.POST;
+import retrofit2.http.PUT;
+import retrofit2.http.Path;
+import retrofit2.http.QueryMap;
+
+public interface ${class}Service {
+
+    @GET("${type}")
+    Call<TypeCollection<${class}>> list();
+
+    @GET("${type}")
+    Call<TypeCollection<${class}>> list(@QueryMap Filter filters);
+
+    @GET("${type}/{id}")
+    Call<${class}> get(@Path("id") String id);
+
+    @POST("${type}")
+    Call<${class}> create(@Body ${class} ${type});
+
+    @PUT("${type}/{id}")
+    Call<${class}> update(@Path("id") String id, @Body ${class} ${type});
+
+    @DELETE("${type}/{id}")
+    Call<Response> delete(@Path("id") String id);
+#foreach($entry in $model.resourceActions.entrySet()) #set ( $k = $dashToUnderscore.apply($entry.key) ) #set ( $v = $entry.value )
+    @POST("${type}/{id}?action=${k}")
+    #if(!$v.input)
+        #if ($v.output)
+    Call<${capitalize.apply($v.output)}> ${entry.key}(@Path("id") String id);
+        #else
+    Call<void> ${entry.key}(@Path("id") String id);
+        #end
+    #else
+        #if ($v.output)
+    Call<${capitalize.apply($v.output)}> ${entry.key}(@Path("id") String id, @Body ${capitalize.apply($v.input)} ${v.input});
+        #else
+    Call<void> ${entry.key}(@Path("id") String id, @Body ${capitalize.apply($v.input)} ${v.input});
+        #end
+    #end
+#end
+}

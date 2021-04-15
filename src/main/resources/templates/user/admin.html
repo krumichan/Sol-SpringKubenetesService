@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragment/base::html-head"></head>
+<body>
+<div id="wrapper">
+    <div th:replace="fragment/base::left"></div>
+    <div id="page-wrapper" class="gray-bg">
+        <div th:replace="fragment/base::header"></div>
+
+        <div>
+            <h2>관리자 전용 페이지</h2>
+
+            <form id="logout" action="/logout" method="POST">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                <input type="submit" value="로그아웃"/>
+            </form>
+        </div>
+
+        <div th:replace="fragment/base::footer"></div>
+    </div>
+</div>
+<div th:replace="fragment/base::scripts"></div>
+</body>
+
+</html>
